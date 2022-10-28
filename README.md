@@ -35,7 +35,7 @@ We will copy AWS S3 bucket from one AWS account to another account AWS account.
 ```
 Note: Please replace SOURCE-BUCKET-NAME and DESTINATION-BUCKET-NAME as per your scenario.
 
-2. In Source account, create an IAM user and attach newly created policy in step 1. Download access key of this user and configure it on aws cli.
+2. In source account, create an IAM user and attach newly created policy in step 1. Download access key of this user and configure it on aws cli.
 3. If you want to perform this activity from EC2 instance of source account then create one role and assign newly created policy to that role. Then           attach that role to EC2 instance. (For this step 2 is not required)
 4. In the destination account, set S3 Object Ownership on the destination bucket to bucket owner preferred. After you set S3 Object Ownership, new objects uploaded with the access control list (ACL) set to bucket-owner-full-control are automatically owned by the bucket's account.
 5. In the destination account, add bucket policy to the destination bucket to grant permissions to upload objects from source account. You can use bucket policy similar to the following:
@@ -72,6 +72,7 @@ Note: Please replace SOURCE-BUCKET-NAME and DESTINATION-BUCKET-NAME as per your 
 ```
 Note: Replace DESTINATION-BUCKET-NAME with your destination bucket name and arn:aws:iam::1111111111:user/UserName with newly created user's ARN.
       If you are using IAM Roles then replace arn:aws:iam::1111111111:user/UserName with Role ARN.
+
 6. After that use newly created user or EC2 instance in which you have attach newly created IAM role to copy bucket from source to destination account. Command is as given below:
  ```
 aws s3 sync s3://SOURCE-BUCKET-NAME/ s3://DESTINATION-BUCKET-NAME/ --acl bucket-owner-full-control
